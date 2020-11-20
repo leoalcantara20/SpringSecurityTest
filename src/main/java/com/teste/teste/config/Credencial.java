@@ -2,23 +2,23 @@ package com.teste.teste.config;
 
 public class Credencial {
 
-    private String nomeUsuario;
-    private String senha;
+    private String username;
+    private String password;
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public String getSenha() {
-        return senha;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }    
-    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+        
 }

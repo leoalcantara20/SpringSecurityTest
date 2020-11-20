@@ -1,5 +1,6 @@
 package com.teste.teste.config;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.Collections;
 
@@ -26,6 +27,13 @@ public class GeradorTokenAutenticacao {
                         .signWith(SignatureAlgorithm.HS512, SECRET)
                         .compact();
         resp.addHeader(HEADER_STRING, PREFIXO_TOKEN+" "+jwt);
+
+        try{
+            resp.getWriter().println(PREFIXO_TOKEN+" "+jwt);
+        } catch(IOException e){
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        
     }
 
     static Authentication getAuthentication(HttpServletRequest req){

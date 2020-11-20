@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Obter Token</h1>
+        <p>
+            <label>Usuário:</label>
+            <input id="username" type="text" name="username"></input>
+        </p>
+        
+        <p>
+            <label>Senha:</label>
+            <input id="password" type="password" name="password"></input>
+        </p>
+        
+        <p>
+            <button type="submit" onclick="gerarToken()"/>Gerar Token</button>
+        </p>
+
+        <p id="token"></p>
+    </body>
+
+    <script>
+        function gerarToken(){
+            var xhr = new XMLHttpRequest();
+            var url = '/login';
+            xhr.open("POST", url);
+            xhr.setRequestHeader("Content-Type","application/json");
+            var user = document.getElementById('username').value;
+            var senha = document.getElementById('password').value;
+            var jsonEnvio = {username:''+user+'',password:''+senha+''};
+            xhr.send(JSON.stringify(jsonEnvio));
+            xhr.onreadystatechange = function() {
+                var retorno = xhr.responseText;
+                document.getElementById('token').textContent = retorno;
+            }
+        }
+    </script>
+
+</html>

@@ -17,12 +17,13 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            // .csrf().disable()       
-            .authorizeRequests().antMatchers("/","/csrf").permitAll()           
-            .and()            
-            .authorizeRequests().anyRequest().authenticated() 
-            .and()
-            .httpBasic()
+            .csrf().disable()       
+            .authorizeRequests().antMatchers("/","/csrf","/login","/obterToken.html","/favicon.ico").permitAll()           
+            // .and()            
+            // .authorizeRequests()
+                .anyRequest().authenticated() 
+            // .and()
+            // .httpBasic()
             .and()
             .addFilterBefore(new JwtLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(new JwtAutenticacaoFilter(), UsernamePasswordAuthenticationFilter.class);
