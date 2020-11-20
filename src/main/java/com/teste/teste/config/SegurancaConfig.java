@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -21,7 +22,10 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter{
             .and()            
             .authorizeRequests().anyRequest().authenticated() 
             .and()
-            .httpBasic();
+            .httpBasic()
+            .and()
+            .addFilterBefore(new JwtLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new JwtAutenticacaoFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
